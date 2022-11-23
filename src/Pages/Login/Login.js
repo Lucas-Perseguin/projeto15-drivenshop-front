@@ -1,10 +1,10 @@
-import { useState } from "react";
-import styled from "styled-components";
-import Anchor from "../../Components/Forms/Anchor/Anchor";
-import Button from "../../Components/Forms/Button/Button";
-import Input from "../../Components/Forms/Input/Input";
-import InputGroup from "../../Components/Forms/Input/InputGroup";
-import Label from "../../Components/Forms/Input/Label";
+import { useState } from 'react';
+import styled from 'styled-components';
+import Anchor from '../../Components/Forms/Anchor/Anchor';
+import Button from '../../Components/Forms/Button/Button';
+import Input from '../../Components/Forms/Input/Input';
+import InputGroup from '../../Components/Forms/Input/InputGroup';
+import Label from '../../Components/Forms/Input/Label';
 
 const Container = styled.div`
   width: 100%;
@@ -30,8 +30,8 @@ const Form = styled.form`
   }
 `;
 
-const Tittle = styled.h1`
-  font-family: "Poppins";
+const Title = styled.h1`
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 900;
   font-size: 42px;
@@ -48,19 +48,19 @@ const Inputs = styled.div`
 
 export default function Login() {
   const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("VERIFICANDO DADOS: ", formValues);
+    console.log('VERIFICANDO DADOS: ', formValues);
   }
 
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
-        <Tittle>LOGIN</Tittle>
+        <Title>LOGIN</Title>
         <Inputs>
           <InputGroup>
             <Label>EMAIL</Label>
@@ -84,7 +84,7 @@ export default function Login() {
           </InputGroup>
         </Inputs>
         <Button>ENTRAR</Button>
-        <Anchor to="/">NÃO POSSUI UMA CONTA?</Anchor>
+        <Anchor to="/cadastro">NÃO POSSUI UMA CONTA?</Anchor>
       </Form>
     </Container>
   );

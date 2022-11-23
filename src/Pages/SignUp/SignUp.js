@@ -2,87 +2,50 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { mainPink, mainGrey } from '../../constants';
+import Anchor from '../../Components/Forms/Anchor/Anchor';
+import Button from '../../Components/Forms/Button/Button';
+import Input from '../../Components/Forms/Input/Input';
+import InputGroup from '../../Components/Forms/Input/InputGroup';
+import Label from '../../Components/Forms/Input/Label';
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
-  background-color: ${mainGrey};
+  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SignUpContainer = styled.div`
-  width: 550px;
-  height: 750px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${mainGrey};
-  font-weight: 800;
-  h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
+  padding: 20px;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
+  width: 100%;
+  max-width: 450px;
+  padding: 30px;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    align-items: flex-start;
-    justify-content: center;
-    width: 450px;
-    font-size: 14px;
-    input {
-      height: 40px;
-      width: 100%;
-      border: 1px solid black;
-      border-radius: 4px;
-      color: black;
-      font-weight: 400;
-      font-size: 18px;
-    }
-  }
-  margin: 20px 0;
-`;
-
-const SignUpButton = styled.button`
-  background-color: ${mainPink};
-  width: 200px;
-  height: 60px;
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-size: 18px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 10px;
-  :hover {
-    text-decoration: underline;
-    cursor: pointer;
+  border-radius: 10px;
+  align-items: center;
+  gap: 25px;
+  @media (min-width: 900px) {
+    padding: 30px 60px 60px 60px;
   }
 `;
 
-const ToLoginButton = styled.button`
-  color: lightgrey;
-  border: none;
-  background-color: white;
-  font-size: 12px;
-  font-weight: 500;
-  text-align: center;
-  :hover {
-    color: grey;
-    text-decoration: underline;
-    cursor: pointer;
-  }
+const Title = styled.h1`
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 42px;
+  letter-spacing: 0.05em;
+  color: #2c2c2c;
+`;
+
+const Inputs = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 export default function SignUp() {
@@ -113,60 +76,53 @@ export default function SignUp() {
   }
   return (
     <Container>
-      <SignUpContainer>
-        <h1>CADASTRAR</h1>
-        <Form>
-          <div>
-            <h2>NOME</h2>
-            <input
+      <Form>
+        <Title>CADASTRAR</Title>
+        <Inputs>
+          <InputGroup>
+            <Label>NOME</Label>
+            <Input
               type="text"
-              placeholder="Insira seu nome"
               value={name}
               onChange={(event) => setName(event.target.value)}
-            ></input>
-          </div>
-          <div>
-            <h2>EMAIL</h2>
-            <input
-              type="email"
-              placeholder="Insira seu email"
+            />
+          </InputGroup>
+          <InputGroup>
+            <Label>EMAIL</Label>
+            <Input
+              type="text"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-            ></input>
-          </div>
-          <div>
-            <h2>CPF</h2>
-            <input
+            />
+          </InputGroup>
+          <InputGroup>
+            <Label>CPF</Label>
+            <Input
               type="text"
-              placeholder="Insira seu cpf"
               value={cpf}
               onChange={(event) => setCpf(event.target.value)}
-            ></input>
-          </div>
-          <div>
-            <h2>SENHA</h2>
-            <input
+            />
+          </InputGroup>
+          <InputGroup>
+            <Label>SENHA</Label>
+            <Input
               type="text"
-              placeholder="Insira sua senha"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-            ></input>
-          </div>
-          <div>
-            <h2>CONFIRMAR SENHA</h2>
-            <input
+            />
+          </InputGroup>
+          <InputGroup>
+            <Label>CONFIRMAR SENHA</Label>
+            <Input
               type="text"
-              placeholder="Confirme sua senha"
               value={confirmPassword}
               onChange={(event) => setConfirmPassword(event.target.value)}
-            ></input>
-          </div>
-        </Form>
-        <SignUpButton onClick={handleSignUp}>CRIAR</SignUpButton>
-        <ToLoginButton onClick={() => navigate('/login')}>
-          JA POSSUI UMA CONTA?
-        </ToLoginButton>
-      </SignUpContainer>
+            />
+          </InputGroup>
+        </Inputs>
+        <Button onClick={handleSignUp}>CRIAR</Button>
+        <Anchor to="/login">JÁ POSSUI UMA CONTA?</Anchor>
+      </Form>
     </Container>
   );
 }
