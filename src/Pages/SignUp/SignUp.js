@@ -93,7 +93,7 @@ export default function SignUp() {
           <InputGroup>
             <Label>EMAIL</Label>
             <Input
-              type="text"
+              type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -109,7 +109,7 @@ export default function SignUp() {
           <InputGroup>
             <Label>SENHA</Label>
             <Input
-              type="text"
+              type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
@@ -117,7 +117,7 @@ export default function SignUp() {
           <InputGroup>
             <Label>CONFIRMAR SENHA</Label>
             <Input
-              type="text"
+              type="password"
               value={confirmPassword}
               onChange={(event) => setConfirmPassword(event.target.value)}
             />
