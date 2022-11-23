@@ -9,8 +9,6 @@ import InputGroup from '../../Components/Forms/Input/InputGroup';
 import Label from '../../Components/Forms/Input/Label';
 import dotenv from 'dotenv';
 
-dotenv.config();
-
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -52,6 +50,7 @@ const Inputs = styled.div`
 `;
 
 export default function SignUp() {
+  dotenv.config();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [cpf, setCpf] = useState('');
