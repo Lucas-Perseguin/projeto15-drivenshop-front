@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { mainPink, mainGrey } from '../constants';
+import { mainPink, mainGrey } from '../../constants';
 
 const Container = styled.div`
   width: 100%;
