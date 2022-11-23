@@ -21,6 +21,8 @@ const SignUpContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: ${mainGrey};
+  font-weight: 700;
 `;
 
 const Form = styled.div`
@@ -38,6 +40,8 @@ const Form = styled.div`
       width: 100%;
       border: 2px black;
       border-radius: 4px;
+      color: black;
+      font-weight: 400;
     }
   }
 `;
