@@ -1,13 +1,16 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import SignUp from './Pages/SignUp.js';
-import './Assets/Global.js';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LayoutDefault from "./Layouts/LayoutDefault";
+import Login from "./Pages/Login/Login";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/cadastro" element={<SignUp />} />
-      </Routes>
+      <LayoutDefault>
+        <Routes>
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/cadastro" element={<SignUp />} />
+        </Routes>
+      </LayoutDefault>
     </BrowserRouter>
   );
 }
