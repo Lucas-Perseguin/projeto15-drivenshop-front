@@ -55,6 +55,11 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+  if (token) {
+    alert('Para poder cadastrar um nova conta você deve estar deslogado!');
+    navigate('/');
+  }
   function handleSignUp() {
     if (!(name && email && cpf && password && confirmPassword)) {
       return alert('Preencha todos os campos!');
