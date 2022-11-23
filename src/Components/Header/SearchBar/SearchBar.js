@@ -8,7 +8,7 @@ const Container = styled.div`
   align-items: center;
   background-color: transparent;
   transition: all 0.3s ease;
-  max-height: ${(props) => (props.state ? "0" : "auto")};
+  height: ${(props) => (props.state ? "0" : "auto")};
   padding: ${(props) => (props.state ? "0" : "15px")};
 `;
 

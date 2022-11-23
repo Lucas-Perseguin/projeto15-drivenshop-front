@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./Logo/Logo";
@@ -38,7 +38,11 @@ const IconGroup = styled.div`
 `;
 
 export default function Header() {
-  const [toggleSearch, setToggleSearch] = useState(false);
+  const [toggleSearch, setToggleSearch] = useState(true);
+
+  useEffect(() => {
+    console.log(toggleSearch);
+  }, []);
 
   return (
     <Container>
