@@ -7,6 +7,9 @@ import Button from '../../Components/Forms/Button/Button';
 import Input from '../../Components/Forms/Input/Input';
 import InputGroup from '../../Components/Forms/Input/InputGroup';
 import Label from '../../Components/Forms/Input/Label';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const Container = styled.div`
   width: 100%;

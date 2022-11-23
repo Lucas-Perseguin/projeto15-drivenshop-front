@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export default styled.button`
   padding: 15px 50px;
   background: #ff4791;
   border-radius: 50px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 900;
   font-size: 16px;
