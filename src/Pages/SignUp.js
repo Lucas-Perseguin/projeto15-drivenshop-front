@@ -22,28 +22,36 @@ const SignUpContainer = styled.div`
   align-items: center;
   justify-content: center;
   color: ${mainGrey};
-  font-weight: 700;
+  font-weight: 800;
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
 `;
 
 const Form = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   div {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     align-items: flex-start;
     justify-content: center;
     width: 450px;
+    font-size: 14px;
     input {
+      height: 40px;
       width: 100%;
-      border: 2px black;
+      border: 1px solid black;
       border-radius: 4px;
       color: black;
       font-weight: 400;
+      font-size: 18px;
     }
   }
+  margin: 20px 0;
 `;
 
 const SignUpButton = styled.button`
@@ -56,15 +64,25 @@ const SignUpButton = styled.button`
   font-size: 18px;
   font-weight: 700;
   text-align: center;
+  margin-bottom: 10px;
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 const ToLoginButton = styled.button`
   color: lightgrey;
   border: none;
-  background-color: none;
+  background-color: white;
   font-size: 12px;
   font-weight: 500;
   text-align: center;
+  :hover {
+    color: grey;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 export default function SignUp() {
@@ -110,7 +128,7 @@ export default function SignUp() {
           <div>
             <h2>EMAIL</h2>
             <input
-              type="text"
+              type="email"
               placeholder="Insira seu email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
