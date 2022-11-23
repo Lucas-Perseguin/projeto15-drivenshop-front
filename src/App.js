@@ -1,6 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LayoutDefault from "./Layouts/LayoutDefault";
-import Login from "./Pages/Login/Login";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LayoutDefault from './Layouts/LayoutDefault';
+import Login from './Pages/Login/Login';
+import SignUp from './Pages/SignUp/SignUp';
 
 export default function App() {
   return (
@@ -14,5 +15,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
