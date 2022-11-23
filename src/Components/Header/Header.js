@@ -14,6 +14,7 @@ const Container = styled.div`
 const MaxWidthContainer = styled.div`
   width: 100%;
   background-color: #fff;
+  border-bottom: 1px solid #d5d6da;
 `;
 
 const ContainerHeader = styled.header`
