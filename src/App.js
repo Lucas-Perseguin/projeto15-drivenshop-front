@@ -8,8 +8,11 @@ export default function App() {
       <LayoutDefault>
         <Routes>
           <Route path="/login" exact element={<Login />} />
+          <Route path="/cadastro" element={<SignUp />} />
         </Routes>
       </LayoutDefault>
     </BrowserRouter>
   );
 }
+
+export default App;
