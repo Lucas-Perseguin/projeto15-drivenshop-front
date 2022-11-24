@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { mainGrey } from '../../constants';
+import LoadingPage from '../LoadingPage/LoadingPage';
+import ProductInCart from './ProductInCart';
 
 const Container = styled.div`
   width: 100%;
@@ -51,16 +53,49 @@ const Values = styled.div`
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [totalValue, setTotalValue] = useState(0);
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const localCart = JSON.parse(localStorage.getItem('cart'));
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    };
+    if (token && localCart) {
+      localCart.forEach((product) => {
+        const promisse = axios.post(
+          `${process.env.REACT_APP_BACK_END_API_URI}/add/${product._id}`,
+          { amount: product.amount },
+          config
+        );
+        promisse.then((response) => {});
+        promisse.catch((error) => {
+          return alert(
+            `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
+          );
+        });
+      });
+      localStorage.removeItem('cart');
+    }
     if (!token) {
-      setCart(JSON.parse(localStorage.getItem('cart')));
+      localCart.forEach((product) => {
+        const promisse = axios.get(
+          `${process.env.REACT_APP_BACK_END_API_URI}/product/${product._id}`
+        );
+        promisse.then((response) => {
+          cart.push(response.data);
+        });
+        promisse.catch((error) => {
+          return alert(
+            `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
+          );
+        });
+      });
+      setCart(cart);
+      setLoading(false);
     } else {
-      const config = {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      };
       const promisse = axios.get(
         `${process.env.REACT_APP_BACK_END_API_URI}/cart`,
         config
@@ -70,21 +105,47 @@ export default function Cart() {
       });
       promisse.catch((error) => {
         return alert(
-          `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
+          `Erro: ${error.response.status}\n,Algo deu errado tente novamente mais tarde!`
         );
       });
+      setLoading(false);
     }
+    const auxTotalValue = cart.reduce((sum, product) => (sum += product.price));
+    setTotalValue(auxTotalValue);
   }, []);
-  return (
-    <Container>
-      <Title>
-        <ion-icon name="bag-handle-outline"></ion-icon>
-        <h1>MEU CARRINHO</h1>
-      </Title>
-      <MainDataContainer>
-        <Productscontainer></Productscontainer>
-        <Values></Values>
-      </MainDataContainer>
-    </Container>
-  );
+  if (isLoading) {
+    return <LoadingPage text="Carregando itens do carrinho!" />;
+  } else {
+    return (
+      <Container>
+        <Title>
+          <ion-icon name="bag-handle-outline"></ion-icon>
+          <h1>MEU CARRINHO</h1>
+        </Title>
+        <MainDataContainer>
+          <Productscontainer>
+            {cart.map((product) => (
+              <ProductInCart
+                key={product._id}
+                product={product}
+                cart={cart}
+                setCart={setCart}
+                totalValue={totalValue}
+                setTotalValue={setTotalValue}
+              />
+            ))}
+          </Productscontainer>
+          <Values>
+            <h1>
+              Total:{' '}
+              {totalValue.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </h1>
+          </Values>
+        </MainDataContainer>
+      </Container>
+    );
+  }
 }
