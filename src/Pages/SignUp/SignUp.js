@@ -72,7 +72,7 @@ export default function SignUp() {
       { name, email, cpf, password }
     );
     promisse.then((response) => {
-      localStorage.setItem(response.data.token);
+      localStorage.setItem('token', `${response.data.token}`);
       navigate('/');
     });
     promisse.catch((error) => {
