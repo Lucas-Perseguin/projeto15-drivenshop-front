@@ -40,10 +40,6 @@ const IconGroup = styled.div`
 export default function Header() {
   const [toggleSearch, setToggleSearch] = useState(true);
 
-  useEffect(() => {
-    console.log(toggleSearch);
-  }, []);
-
   return (
     <Container>
       <MaxWidthContainer>
