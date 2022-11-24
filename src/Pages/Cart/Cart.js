@@ -80,20 +80,7 @@ export default function Cart() {
       localStorage.removeItem('cart');
     }
     if (!token) {
-      localCart.forEach((product) => {
-        const promisse = axios.get(
-          `${process.env.REACT_APP_BACK_END_API_URI}/product/${product._id}`
-        );
-        promisse.then((response) => {
-          cart.push(response.data);
-        });
-        promisse.catch((error) => {
-          return alert(
-            `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
-          );
-        });
-      });
-      setCart(cart);
+      setCart(localCart);
       setLoading(false);
     } else {
       const promisse = axios.get(
