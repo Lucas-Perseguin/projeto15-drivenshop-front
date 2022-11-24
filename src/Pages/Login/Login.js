@@ -1,59 +1,31 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import Anchor from "../../Components/Forms/Anchor/Anchor";
 import Button from "../../Components/Forms/Button/Button";
 import Input from "../../Components/Forms/Input/Input";
 import InputGroup from "../../Components/Forms/Input/InputGroup";
 import Label from "../../Components/Forms/Input/Label";
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 450px;
-  padding: 30px;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  align-items: center;
-  gap: 25px;
-  @media (min-width: 900px) {
-    padding: 30px 60px 60px 60px;
-  }
-`;
-
-const Title = styled.h1`
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 900;
-  font-size: 42px;
-  letter-spacing: 0.05em;
-  color: #2c2c2c;
-`;
-
-const Inputs = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
+import { isLoggedInContext } from "../../Context/isLoggedInContext";
+import { isLoggedIn } from "../../Utils/auth";
+import { Container, Form, Title, Inputs } from "./Login.style";
 
 export default function Login() {
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
+  const tokenContext = useContext(isLoggedInContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const promise = isLoggedIn();
+    promise.then(() => {
+      navigate("/");
+    });
+    promise.catch((msg) => console.error(msg));
+  }, [navigate]);
+
   function handleSubmit(e) {
     e.preventDefault();
     const promise = axios.post(
@@ -63,6 +35,7 @@ export default function Login() {
 
     promise.then(({ data }) => {
       localStorage.token = data.token;
+      tokenContext.setIsToken((prev) => true);
       navigate("/");
     });
 
