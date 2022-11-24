@@ -193,7 +193,7 @@ export default function Product() {
         },
       };
       const promisse = axios.post(
-        `${process.env.REACT_APP_BACK_END_API_URI}/add/:${productId}`,
+        `${process.env.REACT_APP_BACK_END_API_URI}/add/${productId}`,
         { amount },
         config
       );
