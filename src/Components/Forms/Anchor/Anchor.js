@@ -20,7 +20,7 @@ const Container = styled.div`
 export default function Anchor({ children, to = '/', rest }) {
   return (
     <Container {...rest}>
-      <Link to={to}>{children}</Link>
+      <Link to={to}>{children}</Link>      
     </Container>
   );
 }
