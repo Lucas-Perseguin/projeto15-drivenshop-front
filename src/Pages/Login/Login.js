@@ -61,8 +61,8 @@ export default function Login() {
       formValues
     );
 
-    promise.then(({ token }) => {
-      localStorage.token = token;
+    promise.then(({ data }) => {
+      localStorage.token = data.token;
       navigate("/");
     });
 
