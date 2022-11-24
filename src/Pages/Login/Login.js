@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import Anchor from '../../Components/Forms/Anchor/Anchor';
-import Button from '../../Components/Forms/Button/Button';
-import Input from '../../Components/Forms/Input/Input';
-import InputGroup from '../../Components/Forms/Input/InputGroup';
-import Label from '../../Components/Forms/Input/Label';
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import Anchor from "../../Components/Forms/Anchor/Anchor";
+import Button from "../../Components/Forms/Button/Button";
+import Input from "../../Components/Forms/Input/Input";
+import InputGroup from "../../Components/Forms/Input/InputGroup";
+import Label from "../../Components/Forms/Input/Label";
 
 const Container = styled.div`
   width: 100%;
@@ -31,7 +33,7 @@ const Form = styled.form`
 `;
 
 const Title = styled.h1`
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 900;
   font-size: 42px;
@@ -48,13 +50,26 @@ const Inputs = styled.div`
 
 export default function Login() {
   const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-
+  const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('VERIFICANDO DADOS: ', formValues);
+    const promise = axios.post(
+      process.env.REACT_APP_BACK_END_API_URI + "/sign-in",
+      formValues
+    );
+
+    promise.then(({ token }) => {
+      localStorage.token = token;
+      navigate("/");
+    });
+
+    promise.catch((err) => {
+      console.log(err);
+      alert("Ocorreu um erro\nVerifique o seu email e senha");
+    });
   }
 
   return (
