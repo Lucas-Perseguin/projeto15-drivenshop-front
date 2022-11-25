@@ -122,9 +122,8 @@ export default function ProductInCart({
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     };
-    const promisse = axios.post(
+    const promisse = axios.delete(
       `${process.env.REACT_APP_BACK_END_API_URI}/delete/${product._id}`,
-      null,
       config
     );
     promisse.then((response) => {

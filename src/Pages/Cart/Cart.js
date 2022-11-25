@@ -133,9 +133,8 @@ export default function Cart() {
           Authorization: 'Bearer ' + token,
         },
       };
-      const promisse = axios.post(
+      const promisse = axios.delete(
         `${process.env.REACT_APP_BACK_END_API_URI}/deleteCart`,
-        null,
         config
       );
       promisse.then((response) => {
