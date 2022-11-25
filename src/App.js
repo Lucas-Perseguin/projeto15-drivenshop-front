@@ -1,12 +1,14 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import IsLoggedInProvider from "./Context/isLoggedInContext";
-import LayoutDefault from "./Layouts/LayoutDefault";
-import Cart from "./Pages/Cart/Cart";
-import Login from "./Pages/Login/Login";
-import Product from "./Pages/Product/Product";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LayoutDefault from './Layouts/LayoutDefault';
+import Cart from './Pages/Cart/Cart';
+import Login from './Pages/Login/Login';
+import Product from './Pages/Product/Product';
+import SignUp from './Pages/SignUp/SignUp';
+import MainPage from './Pages/Main/MainPage';
+import SearchPage from './Pages/Search/SearchPage';
 import ProductBySale from "./Pages/ProductBySale/ProductBySale";
 import ProductByType from "./Pages/ProductByType/ProductByType";
-import SignUp from "./Pages/SignUp/SignUp";
+import IsLoggedInProvider from "./Context/isLoggedInContext";
 
 export default function App() {
   return (
@@ -14,6 +16,8 @@ export default function App() {
       <BrowserRouter>
         <LayoutDefault>
           <Routes>
+            <Route path="/" element={<MainPage />}/>
+            <Route path="/search" element={<SearchPage />}/>
             <Route path="/login" exact element={<Login />} />
             <Route path="/cadastro" element={<SignUp />} />
             <Route path="/produto/:productId" element={<Product />} />
@@ -24,5 +28,5 @@ export default function App() {
         </LayoutDefault>
       </BrowserRouter>
     </IsLoggedInProvider>
-  );
+  )
 }

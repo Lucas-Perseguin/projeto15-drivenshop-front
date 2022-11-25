@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -59,8 +60,13 @@ const SearchButton = styled.button`
 `;
 
 export default function SearchBar({ state }) {
+  const navigate = useNavigate();
   const [value, setValue] = useState("");
 
+  function dataSearch(){
+    navigate("/search", {state:{name: value}});
+    setValue("")
+  }  
   return (
     <Container state={state}>
       <MaxWidthContainer>
@@ -70,7 +76,7 @@ export default function SearchBar({ state }) {
           value={value}
           onChange={(e) => setValue(() => e.target.value)}
         />
-        <SearchButton state={state}>
+        <SearchButton onClick={dataSearch} state={state}>
           <ion-icon
             style={{ fontSize: "22px", color: "#fff", cursor: "pointer" }}
             name="search"
