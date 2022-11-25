@@ -234,7 +234,9 @@ export default function Product() {
         ></ion-icon>
         <Button onClick={() => handleBuy(true)}>COMPRAR</Button>
         <Counter>
-          <button onClick={() => setAmount(amount - 1)}>-</button>
+          <button disable={amount === 0} onClick={() => setAmount(amount - 1)}>
+            -
+          </button>
           <div>{amount}</div>
           <button onClick={() => setAmount(amount + 1)}>+</button>
         </Counter>
