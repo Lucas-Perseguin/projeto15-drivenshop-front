@@ -6,9 +6,9 @@ import Product from './Pages/Product/Product';
 import SignUp from './Pages/SignUp/SignUp';
 import MainPage from './Pages/Main/MainPage';
 import SearchPage from './Pages/Search/SearchPage';
-import ProductBySale from "./Pages/ProductBySale/ProductBySale";
-import ProductByType from "./Pages/ProductByType/ProductByType";
-import IsLoggedInProvider from "./Context/isLoggedInContext";
+import ProductBySale from './Pages/ProductBySale/ProductBySale';
+import ProductByType from './Pages/ProductByType/ProductByType';
+import IsLoggedInProvider from './Context/isLoggedInContext';
 
 export default function App() {
   return (
@@ -16,8 +16,8 @@ export default function App() {
       <BrowserRouter>
         <LayoutDefault>
           <Routes>
-            <Route path="/" element={<MainPage />}/>
-            <Route path="/search" element={<SearchPage />}/>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/busca" element={<SearchPage />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/cadastro" element={<SignUp />} />
             <Route path="/produto/:productId" element={<Product />} />
@@ -28,5 +28,5 @@ export default function App() {
         </LayoutDefault>
       </BrowserRouter>
     </IsLoggedInProvider>
-  )
+  );
 }

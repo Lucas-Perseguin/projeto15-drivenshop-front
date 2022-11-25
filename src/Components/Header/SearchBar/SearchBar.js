@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100%;
@@ -9,8 +9,8 @@ const Container = styled.div`
   align-items: center;
   background-color: transparent;
   transition: all 0.3s ease;
-  height: ${(props) => (props.state ? "0" : "auto")};
-  padding: ${(props) => (props.state ? "0" : "15px")};
+  height: ${(props) => (props.state ? '0' : 'auto')};
+  padding: ${(props) => (props.state ? '0' : '15px')};
 `;
 
 const MaxWidthContainer = styled.div`
@@ -24,9 +24,9 @@ const MaxWidthContainer = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  height: ${(props) => (props.state ? "0" : "auto")};
-  padding: ${(props) => (props.state ? "0" : "15px 25px")};
-  border: ${(props) => (props.state ? "0" : "2px solid #d5d6da")};
+  height: ${(props) => (props.state ? '0' : 'auto')};
+  padding: ${(props) => (props.state ? '0' : '15px 25px')};
+  border: ${(props) => (props.state ? '0' : '2px solid #d5d6da')};
   border-radius: 50px;
   outline: none;
 
@@ -43,7 +43,7 @@ const SearchButton = styled.button`
   background-color: #d5d6da;
   color: #fff;
   padding: 10px;
-  display: ${(props) => (props.state ? "none" : "flex")};
+  display: ${(props) => (props.state ? 'none' : 'flex')};
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -61,12 +61,12 @@ const SearchButton = styled.button`
 
 export default function SearchBar({ state }) {
   const navigate = useNavigate();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
-  function dataSearch(){
-    navigate("/search", {state:{name: value}});
-    setValue("")
-  }  
+  function dataSearch() {
+    navigate('/busca', { state: { name: value } });
+    setValue('');
+  }
   return (
     <Container state={state}>
       <MaxWidthContainer>
@@ -78,7 +78,7 @@ export default function SearchBar({ state }) {
         />
         <SearchButton onClick={dataSearch} state={state}>
           <ion-icon
-            style={{ fontSize: "22px", color: "#fff", cursor: "pointer" }}
+            style={{ fontSize: '22px', color: '#fff', cursor: 'pointer' }}
             name="search"
           ></ion-icon>
         </SearchButton>
