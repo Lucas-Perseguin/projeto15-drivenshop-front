@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { mainGrey } from '../../constants';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import ProductInCart from './ProductInCart';
+import Input from '../../Components/Forms/Input/Input';
+import InputGroup from '../../Components/Forms/Input/InputGroup';
+import Label from '../../Components/Forms/Input/Label';
+import Button from '../../Components/Forms/Button/Button';
 
 const Container = styled.div`
   width: 100%;
@@ -43,7 +47,7 @@ const Productscontainer = styled.div`
   border-radius: 6px;
 `;
 
-const Values = styled.div`
+const Infos = styled.div`
   width: 598px;
   height: 520px;
   background-color: white;
@@ -51,10 +55,22 @@ const Values = styled.div`
   overflow-y: scroll;
 `;
 
+const Inputs = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [totalValue, setTotalValue] = useState(0);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [adress, setAdress] = useState('');
+  const [cellphone, setCellphone] = useState('');
   useEffect(() => {
     const token = localStorage.getItem('token');
     const localCart = JSON.parse(localStorage.getItem('cart'));
@@ -100,6 +116,9 @@ export default function Cart() {
     const auxTotalValue = cart.reduce((sum, product) => (sum += product.price));
     setTotalValue(auxTotalValue);
   }, []);
+
+  function handlePurchase() {}
+
   if (isLoading) {
     return <LoadingPage text="Carregando itens do carrinho!" />;
   } else {
@@ -122,7 +141,50 @@ export default function Cart() {
               />
             ))}
           </Productscontainer>
-          <Values>
+          <Infos>
+            <Label>DADOS DO DESTINATÁRIO</Label>
+            <Inputs>
+              <InputGroup>
+                <Label>NOME</Label>
+                <Input
+                  type="text"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Label>EMAIL</Label>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Label>CPF</Label>
+                <Input
+                  type="text"
+                  value={cpf}
+                  onChange={(event) => setCpf(event.target.value)}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Label>ENDEREÇO</Label>
+                <Input
+                  type="text"
+                  value={adress}
+                  onChange={(event) => setAdress(event.target.value)}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Label>NUMERO DE CELULAR</Label>
+                <Input
+                  type="text"
+                  value={cellphone}
+                  onChange={(event) => setCellphone(event.target.value)}
+                />
+              </InputGroup>
+            </Inputs>
             <h1>
               Total:{' '}
               {totalValue.toLocaleString('pt-br', {
@@ -130,7 +192,8 @@ export default function Cart() {
                 currency: 'BRL',
               })}
             </h1>
-          </Values>
+            <Button onClick={handlePurchase}>CONFIRMAR COMPRA</Button>
+          </Infos>
         </MainDataContainer>
       </Container>
     );
