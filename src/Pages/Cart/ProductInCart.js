@@ -87,6 +87,9 @@ export default function ProductInCart({
   }
 
   function handleRemove() {
+    if (productAmount === 1) {
+      return handleDelete();
+    }
     const config = {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
