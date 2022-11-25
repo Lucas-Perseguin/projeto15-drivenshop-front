@@ -30,13 +30,13 @@ export default function MainPage() {
       <Container>
         <Title>Categorias</Title>
         <Categories>
-          <SmartPhones onClick={() => navigate('/produto/smartphone')}>
+          <SmartPhones onClick={() => navigate('/produtos/smartphone')}>
             <Text>SmartPhones</Text>
           </SmartPhones>
-          <Notebooks onClick={() => navigate('/produto/notebook')}>
+          <Notebooks onClick={() => navigate('/produtos/notebook')}>
             <Text>Notebooks</Text>
           </Notebooks>
-          <Gadgets onClick={() => navigate('/produto/gadget')}>
+          <Gadgets onClick={() => navigate('/produtos/gadget')}>
             <Text>Gadgets</Text>
           </Gadgets>
         </Categories>
