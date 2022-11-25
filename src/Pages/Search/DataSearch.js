@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { mainGrey, mainPink } from "../../constants";
-export default function Item(props){
+export default function DataSearch(props){
     const {product} = props;
     
     const realPrice = product.price.toLocaleString("pt-br", {style: 'currency', currency: "BRL"})
@@ -55,7 +55,7 @@ font-family: 'Poppins';
 font-weight: 900;
 font-size: 16px;
 letter-spacing: 0.05em;
-color: #ffffff;
+color: #fff;
 cursor: pointer;
 text-transform: uppercase;
 &:active{

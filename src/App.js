@@ -5,13 +5,15 @@ import Login from './Pages/Login/Login';
 import Product from './Pages/Product/Product';
 import SignUp from './Pages/SignUp/SignUp';
 import MainPage from './Pages/Main/MainPage';
+import SearchPage from './Pages/Search/SearchPage';
 
 export default function App() {
   return (
     <BrowserRouter>
       <LayoutDefault>
         <Routes>
-          <Route path='/' element={<MainPage />}/>
+          <Route path="/" element={<MainPage />}/>
+          <Route path="/search" element={<SearchPage />}/>
           <Route path="/login" exact element={<Login />} />
           <Route path="/cadastro" element={<SignUp />} />
           <Route path="/produto/:productId" element={<Product />} />
