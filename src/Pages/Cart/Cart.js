@@ -118,7 +118,10 @@ export default function Cart() {
       });
       setLoading(false);
     }
-    const auxTotalValue = cart.reduce((sum, product) => (sum += product.price));
+    const auxTotalValue = cart.reduce(
+      (sum, product) => (sum += product.price),
+      0
+    );
     setTotalValue(auxTotalValue);
   }, []);
 
