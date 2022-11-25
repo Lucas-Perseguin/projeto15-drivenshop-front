@@ -8,6 +8,7 @@ import Input from '../../Components/Forms/Input/Input';
 import InputGroup from '../../Components/Forms/Input/InputGroup';
 import Label from '../../Components/Forms/Input/Label';
 import Button from '../../Components/Forms/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
@@ -53,6 +54,9 @@ const Infos = styled.div`
   background-color: white;
   border-radius: 6px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Inputs = styled.div`
@@ -71,12 +75,13 @@ export default function Cart() {
   const [cpf, setCpf] = useState('');
   const [adress, setAdress] = useState('');
   const [cellphone, setCellphone] = useState('');
+  const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem('token');
     const localCart = JSON.parse(localStorage.getItem('cart'));
     const config = {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: 'Bearer ' + token,
       },
     };
     if (token && localCart) {
@@ -117,7 +122,33 @@ export default function Cart() {
     setTotalValue(auxTotalValue);
   }, []);
 
-  function handlePurchase() {}
+  function handlePurchase() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Para finalizar sua compra você deve estar logado!');
+      navigate('/login');
+    } else {
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      };
+      const promisse = axios.post(
+        `${process.env.REACT_APP_BACK_END_API_URI}/deleteCart`,
+        null,
+        config
+      );
+      promisse.then((response) => {
+        alert('Sua compra foi realizada com sucesso!');
+        navigate('/');
+      });
+      promisse.catch((error) => {
+        alert(
+          `Erro: ${error.rsponse.status}\nAlgo deu errado, tente novamente mais tarde!`
+        );
+      });
+    }
+  }
 
   if (isLoading) {
     return <LoadingPage text="Carregando itens do carrinho!" />;
@@ -130,16 +161,20 @@ export default function Cart() {
         </Title>
         <MainDataContainer>
           <Productscontainer>
-            {cart.map((product) => (
-              <ProductInCart
-                key={product._id}
-                product={product}
-                cart={cart}
-                setCart={setCart}
-                totalValue={totalValue}
-                setTotalValue={setTotalValue}
-              />
-            ))}
+            {cart ? (
+              cart.map((product) => (
+                <ProductInCart
+                  key={product._id}
+                  product={product}
+                  cart={cart}
+                  setCart={setCart}
+                  totalValue={totalValue}
+                  setTotalValue={setTotalValue}
+                />
+              ))
+            ) : (
+              <h1>Você ainda não possui produtos no seu carrinho!</h1>
+            )}
           </Productscontainer>
           <Infos>
             <Label>DADOS DO DESTINATÁRIO</Label>
@@ -192,7 +227,9 @@ export default function Cart() {
                 currency: 'BRL',
               })}
             </h1>
-            <Button onClick={handlePurchase}>CONFIRMAR COMPRA</Button>
+            <Button disabled={!cart} onClick={handlePurchase}>
+              CONFIRMAR COMPRA
+            </Button>
           </Infos>
         </MainDataContainer>
       </Container>
