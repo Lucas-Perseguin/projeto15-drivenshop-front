@@ -156,7 +156,7 @@ export default function Product() {
       const cart = localStorage.getItem('cart');
       if (!cart) {
         const productObj = {
-          _id: productId,
+          ...product,
           amount,
         };
         localStorage.setItem('cart', `${JSON.stringify([productObj])}`);
@@ -167,7 +167,7 @@ export default function Product() {
         );
         if (!productFound) {
           const productObj = {
-            _id: productId,
+            ...product,
             amount,
           };
           cartObj.push(productObj);
