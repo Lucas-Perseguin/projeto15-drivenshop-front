@@ -5,9 +5,11 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Sales from './Sales';
 import LoadingPage from '../LoadingPage/LoadingPage';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainPage() {
   const [products, setProducts] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const promise = axios.get(
@@ -28,13 +30,13 @@ export default function MainPage() {
       <Container>
         <Title>Categorias</Title>
         <Categories>
-          <SmartPhones>
+          <SmartPhones onClick={() => navigate('/produto/smartphone')}>
             <Text>SmartPhones</Text>
           </SmartPhones>
-          <Notebooks>
+          <Notebooks onClick={() => navigate('/produto/notebook')}>
             <Text>Notebooks</Text>
           </Notebooks>
-          <Gadgets>
+          <Gadgets onClick={() => navigate('/produto/gadget')}>
             <Text>Gadgets</Text>
           </Gadgets>
         </Categories>
