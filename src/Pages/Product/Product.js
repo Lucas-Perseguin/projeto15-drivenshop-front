@@ -156,7 +156,7 @@ export default function Product() {
       const cart = localStorage.getItem('cart');
       if (!cart) {
         const productObj = {
-          _id: productId,
+          ...product,
           amount,
         };
         localStorage.setItem('cart', `${JSON.stringify([productObj])}`);
@@ -167,7 +167,7 @@ export default function Product() {
         );
         if (!productFound) {
           const productObj = {
-            _id: productId,
+            ...product,
             amount,
           };
           cartObj.push(productObj);
@@ -221,7 +221,6 @@ export default function Product() {
       <Title>{product.name}</Title>
       <Stars>{stars.map((star) => star)}</Stars>
       <Price>
-        R${' '}
         {product.price.toLocaleString('pt-br', {
           style: 'currency',
           currency: 'BRL',
@@ -235,7 +234,9 @@ export default function Product() {
         ></ion-icon>
         <Button onClick={() => handleBuy(true)}>COMPRAR</Button>
         <Counter>
-          <button onClick={() => setAmount(amount - 1)}>-</button>
+          <button disable={amount === 0} onClick={() => setAmount(amount - 1)}>
+            -
+          </button>
           <div>{amount}</div>
           <button onClick={() => setAmount(amount + 1)}>+</button>
         </Counter>

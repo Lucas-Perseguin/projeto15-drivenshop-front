@@ -6,21 +6,27 @@ import Product from './Pages/Product/Product';
 import SignUp from './Pages/SignUp/SignUp';
 import MainPage from './Pages/Main/MainPage';
 import SearchPage from './Pages/Search/SearchPage';
+import ProductBySale from "./Pages/ProductBySale/ProductBySale";
+import ProductByType from "./Pages/ProductByType/ProductByType";
+import IsLoggedInProvider from "./Context/isLoggedInContext";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <LayoutDefault>
-        <Routes>
-          <Route path="/" element={<MainPage />}/>
-          <Route path="/search" element={<SearchPage />}/>
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/cadastro" element={<SignUp />} />
-          <Route path="/produto/:productId" element={<Product />} />
-          <Route path="/produtos/:type" element={<></>} />
-          <Route path="/carrinho" element={<Cart />} />
-        </Routes>
-      </LayoutDefault>
-    </BrowserRouter>
-  );
+    <IsLoggedInProvider>
+      <BrowserRouter>
+        <LayoutDefault>
+          <Routes>
+            <Route path="/" element={<MainPage />}/>
+            <Route path="/search" element={<SearchPage />}/>
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/cadastro" element={<SignUp />} />
+            <Route path="/produto/:productId" element={<Product />} />
+            <Route path="/produtos/:type" element={<ProductByType />} />
+            <Route path="/produtos/:type/sale" element={<ProductBySale />} />
+            <Route path="/carrinho" element={<Cart />} />
+          </Routes>
+        </LayoutDefault>
+      </BrowserRouter>
+    </IsLoggedInProvider>
+  )
 }

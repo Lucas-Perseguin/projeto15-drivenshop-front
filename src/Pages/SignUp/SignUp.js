@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Anchor from '../../Components/Forms/Anchor/Anchor';
@@ -7,6 +7,7 @@ import Button from '../../Components/Forms/Button/Button';
 import Input from '../../Components/Forms/Input/Input';
 import InputGroup from '../../Components/Forms/Input/InputGroup';
 import Label from '../../Components/Forms/Input/Label';
+import { isLoggedInContext } from '../../Context/isLoggedInContext';
 
 const Container = styled.div`
   width: 100%;
@@ -56,6 +57,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const tokenContext = useContext(isLoggedInContext);
   if (token) {
     alert('Para poder cadastrar um nova conta você deve estar deslogado!');
     navigate('/');
@@ -73,6 +75,7 @@ export default function SignUp() {
     );
     promisse.then((response) => {
       localStorage.setItem('token', `${response.data.token}`);
+      tokenContext.setIsToken((prev) => true);
       navigate('/');
     });
     promisse.catch((error) => {

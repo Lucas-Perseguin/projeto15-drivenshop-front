@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { isLoggedInContext } from "../../Context/isLoggedInContext";
 import Logo from "./Logo/Logo";
 import SearchBar from "./SearchBar/SearchBar";
 
@@ -39,10 +40,20 @@ const IconGroup = styled.div`
 
 export default function Header() {
   const [toggleSearch, setToggleSearch] = useState(true);
+  const contextLoggedIn = useContext(isLoggedInContext);
+  const [isLoggedInIcon, setIsLoggedInIcon] = useState();
+  const navigate = useNavigate();
+
+  function logout() {
+    setIsLoggedInIcon((prev) => false);
+    contextLoggedIn.setIsToken((prev) => false);
+    localStorage.token = "";
+    navigate("/");
+  }
 
   useEffect(() => {
-    console.log(toggleSearch);
-  }, []);
+    if (contextLoggedIn.isToken) setIsLoggedInIcon((prev) => true);
+  }, [contextLoggedIn]);
 
   return (
     <Container>
@@ -65,16 +76,35 @@ export default function Header() {
             ></ion-icon>
             <Link to="/">
               <ion-icon
-                style={{ fontSize: "22px", color: "#2c2c2c" }}
+                style={{
+                  fontSize: "22px",
+                  color: "#2c2c2c",
+                  cursor: "pointer",
+                }}
                 name="cart"
               ></ion-icon>
             </Link>
-            <Link to="/">
+            {!isLoggedInIcon ? (
               <ion-icon
-                style={{ fontSize: "22px", color: "#2c2c2c" }}
+                onClick={() => navigate("/login")}
+                style={{
+                  fontSize: "22px",
+                  color: "#2c2c2c",
+                  cursor: "pointer",
+                }}
                 name="person"
               ></ion-icon>
-            </Link>
+            ) : (
+              <ion-icon
+                style={{
+                  fontSize: "22px",
+                  color: "#2c2c2c",
+                  cursor: "pointer",
+                }}
+                name="log-out-sharp"
+                onClick={logout}
+              ></ion-icon>
+            )}
           </IconGroup>
         </ContainerHeader>
       </MaxWidthContainer>
