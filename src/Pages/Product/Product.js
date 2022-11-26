@@ -120,6 +120,7 @@ const AnchorContainer = styled.div`
 export default function Product() {
   const { productId } = useParams();
   const [product, setProduct] = useState({});
+  const [price, setPrice] = useState(0);
   const [amount, setAmount] = useState(0);
   const [stars, setStars] = useState([]);
   const isLoggedIn = localStorage.getItem('token');
@@ -143,6 +144,7 @@ export default function Product() {
     );
     promisse.then((response) => {
       setProduct(response.data);
+      setPrice(response.data.price);
       createStars(response.data.stars);
     });
     promisse.catch((error) => {
@@ -224,7 +226,7 @@ export default function Product() {
         <Title>{product.name}</Title>
         <Stars>{stars.map((star) => star)}</Stars>
         <Price>
-          {product.price.toLocaleString('pt-br', {
+          {price.toLocaleString('pt-br', {
             style: 'currency',
             currency: 'BRL',
           })}
