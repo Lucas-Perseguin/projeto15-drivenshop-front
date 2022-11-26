@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { mainGrey, mainPink } from '../../constants';
 export default function Item(props) {
   const { product } = props;
   const navigate = useNavigate();
@@ -48,4 +47,4 @@ const Price = styled.p`
   font-size: 1em;
   line-height: 1.5;
   font-weight: 700;
-`;
+`
