@@ -240,7 +240,7 @@ export default function Product() {
           <Button onClick={() => handleBuy(true)}>COMPRAR</Button>
           <Counter>
             <button
-              disable={amount === 0}
+              disabled={amount === 0}
               onClick={() => setAmount(amount - 1)}
             >
               -
