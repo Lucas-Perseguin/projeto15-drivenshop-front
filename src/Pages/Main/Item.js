@@ -49,20 +49,3 @@ const Price = styled.p`
   line-height: 1.5;
   font-weight: 700;
 `;
-const Buy = styled.button`
-  width: 70%;
-  height: 2.5em;
-  background: ${mainGrey};
-  border: 2px solid #fff;
-  border-radius: 50px;
-  font-family: 'Poppins';
-  font-weight: 900;
-  font-size: 16px;
-  letter-spacing: 0.05em;
-  color: #ffffff;
-  cursor: pointer;
-  text-transform: uppercase;
-  &:active {
-    background: ${mainPink};
-  }
-`;

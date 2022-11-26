@@ -155,6 +155,10 @@ export default function Product() {
   }, []);
 
   function handleBuy(isBuy) {
+    if (amount === 0) {
+      alert('VocÊ deve selecionar uma quantidade!');
+      return;
+    }
     if (!isLoggedIn) {
       const cart = localStorage.getItem('cart');
       if (!cart) {
