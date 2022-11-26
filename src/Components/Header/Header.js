@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { isLoggedInContext } from "../../Context/isLoggedInContext";
-import Logo from "./Logo/Logo";
-import SearchBar from "./SearchBar/SearchBar";
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { isLoggedInContext } from '../../Context/isLoggedInContext';
+import Logo from './Logo/Logo';
+import SearchBar from './SearchBar/SearchBar';
 
 const Container = styled.div`
   width: 100%;
@@ -47,8 +47,8 @@ export default function Header() {
   function logout() {
     setIsLoggedInIcon((prev) => false);
     contextLoggedIn.setIsToken((prev) => false);
-    localStorage.token = "";
-    navigate("/");
+    localStorage.token = '';
+    navigate('/');
   }
 
   useEffect(() => {
@@ -59,15 +59,15 @@ export default function Header() {
     <Container>
       <MaxWidthContainer>
         <ContainerHeader>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/" style={{ textDecoration: 'none' }}>
             <Logo />
           </Link>
           <IconGroup>
             <ion-icon
               style={{
-                fontSize: "22px",
-                color: "#FF4791",
-                cursor: "pointer",
+                fontSize: '22px',
+                color: '#FF4791',
+                cursor: 'pointer',
               }}
               name="search"
               onClick={() => {
@@ -77,29 +77,30 @@ export default function Header() {
             <Link to="/">
               <ion-icon
                 style={{
-                  fontSize: "22px",
-                  color: "#2c2c2c",
-                  cursor: "pointer",
+                  fontSize: '22px',
+                  color: '#2c2c2c',
+                  cursor: 'pointer',
                 }}
+                onClick={() => navigate('/carrinho')}
                 name="cart"
               ></ion-icon>
             </Link>
             {!isLoggedInIcon ? (
               <ion-icon
-                onClick={() => navigate("/login")}
+                onClick={() => navigate('/login')}
                 style={{
-                  fontSize: "22px",
-                  color: "#2c2c2c",
-                  cursor: "pointer",
+                  fontSize: '22px',
+                  color: '#2c2c2c',
+                  cursor: 'pointer',
                 }}
                 name="person"
               ></ion-icon>
             ) : (
               <ion-icon
                 style={{
-                  fontSize: "22px",
-                  color: "#2c2c2c",
-                  cursor: "pointer",
+                  fontSize: '22px',
+                  color: '#2c2c2c',
+                  cursor: 'pointer',
                 }}
                 name="log-out-sharp"
                 onClick={logout}
