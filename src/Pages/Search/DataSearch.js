@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { mainGrey, mainPink } from "../../constants";
+import { useNavigate } from "react-router-dom";
+
 export default function DataSearch(props){
     const {product} = props;
+    const navigate = useNavigate();
     
     const realPrice = product.price.toLocaleString("pt-br", {style: 'currency', currency: "BRL"})
     return(
@@ -10,7 +12,6 @@ export default function DataSearch(props){
             <Image src={product.image} alt="Product picture"></Image>           
             <ProductName>{product.name}</ProductName>
             <Price>{realPrice}</Price>
-            <Buy>Comprar</Buy>
         </Container>        
         </>
     )
@@ -44,21 +45,4 @@ color: #fff;
 font-size: 1em;
 line-height: 1.5;
 font-weight: 700;
-`
-const Buy = styled.button`
-width: 70%;
-height: 2.5em;
-background: ${mainGrey};
-border: 2px solid #fff;
-border-radius: 50px;
-font-family: 'Poppins';
-font-weight: 900;
-font-size: 16px;
-letter-spacing: 0.05em;
-color: #fff;
-cursor: pointer;
-text-transform: uppercase;
-&:active{
-    background: ${mainPink};
-}
 `
