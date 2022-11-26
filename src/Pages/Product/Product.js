@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Anchor from '../../Components/Forms/Anchor/Anchor';
 import Button from '../../Components/Forms/Button/Button';
 import { mainGrey, mainPink } from '../../constants';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 const Container = styled.div`
   width: 100%;
@@ -211,38 +212,44 @@ export default function Product() {
       });
     }
   }
-
-  return (
-    <Container>
-      <AnchorContainer>
-        <Anchor to="/produtos/smartphones">SMARTPHONES</Anchor>
-      </AnchorContainer>
-      <img src={product.image} alt="Imagem do produto" />
-      <Title>{product.name}</Title>
-      <Stars>{stars.map((star) => star)}</Stars>
-      <Price>
-        {product.price.toLocaleString('pt-br', {
-          style: 'currency',
-          currency: 'BRL',
-        })}
-      </Price>
-      <hr />
-      <Buttons>
-        <ion-icon
-          name="bag-handle-outline"
-          onClick={() => handleBuy(false)}
-        ></ion-icon>
-        <Button onClick={() => handleBuy(true)}>COMPRAR</Button>
-        <Counter>
-          <button disable={amount === 0} onClick={() => setAmount(amount - 1)}>
-            -
-          </button>
-          <div>{amount}</div>
-          <button onClick={() => setAmount(amount + 1)}>+</button>
-        </Counter>
-      </Buttons>
-      <h1>DESCRIÇÃO</h1>
-      <Description>{product.description}</Description>
-    </Container>
-  );
+  if (!product) {
+    return <LoadingPage text="Carregando informações do produto" />;
+  } else {
+    return (
+      <Container>
+        <AnchorContainer>
+          <Anchor to="/produtos/smartphones">SMARTPHONES</Anchor>
+        </AnchorContainer>
+        <img src={product.image} alt="Imagem do produto" />
+        <Title>{product.name}</Title>
+        <Stars>{stars.map((star) => star)}</Stars>
+        <Price>
+          {product.price.toLocaleString('pt-br', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
+        </Price>
+        <hr />
+        <Buttons>
+          <ion-icon
+            name="bag-handle-outline"
+            onClick={() => handleBuy(false)}
+          ></ion-icon>
+          <Button onClick={() => handleBuy(true)}>COMPRAR</Button>
+          <Counter>
+            <button
+              disable={amount === 0}
+              onClick={() => setAmount(amount - 1)}
+            >
+              -
+            </button>
+            <div>{amount}</div>
+            <button onClick={() => setAmount(amount + 1)}>+</button>
+          </Counter>
+        </Buttons>
+        <h1>DESCRIÇÃO</h1>
+        <Description>{product.description}</Description>
+      </Container>
+    );
+  }
 }
