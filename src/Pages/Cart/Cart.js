@@ -151,7 +151,7 @@ export default function Cart() {
       });
       promisse.catch((error) => {
         alert(
-          `Erro: ${error.rsponse.status}\nAlgo deu errado, tente novamente mais tarde!`
+          `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
         );
       });
     }
