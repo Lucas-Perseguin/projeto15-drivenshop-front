@@ -16,6 +16,17 @@ const Container = styled.div`
 const ProductContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 800px;
+  ion-icon {
+    color: red;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  img {
+    width: 160px;
+    height: 90px;
+    object-fit: cover;
+  }
 `;
 
 const Name = styled.h1``;
@@ -25,15 +36,14 @@ const Price = styled.div``;
 const Counter = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 124px;
   height: 50px;
   button {
-    width: 19px;
-    height: 48px;
     font-weight: 500;
-    font-size: 32px;
+    font-size: 20px;
     text-align: center;
     background-color: ${mainGrey};
+    color: white;
+    width: 25px;
   }
   div {
     width: 50px;
@@ -41,6 +51,8 @@ const Counter = styled.div`
     text-align: center;
     color: black;
     background-color: white;
+    line-height: 50px;
+    font-size: 20px;
   }
 `;
 

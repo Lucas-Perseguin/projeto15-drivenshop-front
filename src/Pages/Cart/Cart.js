@@ -14,7 +14,6 @@ const Container = styled.div`
   width: 100%;
   height: 100;
   background-color: ${mainGrey};
-  overflow-y: hidden;
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -25,38 +24,42 @@ const Container = styled.div`
 
 const Title = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   gap: 30px;
   width: 100%;
+  color: white;
+  ion-icon {
+    font-size: 40px;
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: 900;
+  }
 `;
 
 const MainDataContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  align-items: center;
-  overflow-y: hidden;
-  background-color: ${mainGrey};
+  align-items: flex-start;
+  background-color: white;
+  padding: 20px;
 `;
 
 const Productscontainer = styled.div`
-  overflow-y: scroll;
   background-color: white;
-  width: 730px;
-  height: 715px;
   border-radius: 6px;
 `;
 
 const Infos = styled.div`
-  width: 598px;
-  height: 520px;
+  width: 600px;
   background-color: white;
   border-radius: 6px;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 `;
 
 const Inputs = styled.div`
@@ -64,6 +67,13 @@ const Inputs = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`;
+
+const Value = styled.div`
+  width: 100%;
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
 `;
 
 export default function Cart() {
@@ -125,6 +135,15 @@ export default function Cart() {
         return alert(
           `Erro: ${error.response.status}\n,Algo deu errado tente novamente mais tarde!`
         );
+      });
+      const userFound = axios.get(
+        `${process.env.REACT_APP_BACK_END_API_URI}/user`,
+        config
+      );
+      userFound.then((response) => {
+        setName(response.data.name);
+        setEmail(response.data.eamil);
+        setCpf(response.data.cpf);
       });
       setLoading(false);
     }
@@ -246,13 +265,13 @@ export default function Cart() {
                 />
               </InputGroup>
             </Inputs>
-            <h1>
-              Total:{' '}
+            <Value>
+              Valor total:{' '}
               {totalValue.toLocaleString('pt-br', {
                 style: 'currency',
                 currency: 'BRL',
               })}
-            </h1>
+            </Value>
             <Button disabled={!cart} onClick={handlePurchase}>
               CONFIRMAR COMPRA
             </Button>
