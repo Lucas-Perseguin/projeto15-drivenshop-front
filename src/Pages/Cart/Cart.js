@@ -78,7 +78,7 @@ export default function Cart() {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const localCart = JSON.parse(localStorage.getItem('cart'));
+    const localCart = JSON.parse(localStorage.getItem('cart')) ?? [];
     const config = {
       headers: {
         Authorization: 'Bearer ' + token,
