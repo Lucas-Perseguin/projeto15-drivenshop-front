@@ -103,6 +103,11 @@ export default function Cart() {
     if (!token) {
       setCart(localCart);
       setLoading(false);
+      const auxTotalValue = localCart.reduce(
+        (sum, product) => sum + product.price * product.amount,
+        0
+      );
+      setTotalValue(auxTotalValue);
     } else {
       const promisse = axios.get(
         `${process.env.REACT_APP_BACK_END_API_URI}/cart`,
@@ -110,6 +115,11 @@ export default function Cart() {
       );
       promisse.then((response) => {
         setCart(response.data);
+        const auxTotalValue = response.data.reduce(
+          (sum, product) => sum + product.price * product.amount,
+          0
+        );
+        setTotalValue(auxTotalValue);
       });
       promisse.catch((error) => {
         return alert(
@@ -118,11 +128,6 @@ export default function Cart() {
       });
       setLoading(false);
     }
-    const auxTotalValue = cart.reduce(
-      (sum, product) => sum + product.price * product.amount,
-      0
-    );
-    setTotalValue(auxTotalValue);
   }, []);
 
   function handlePurchase() {

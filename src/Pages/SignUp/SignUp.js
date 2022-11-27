@@ -74,7 +74,7 @@ export default function SignUp() {
       { name, email, cpf, password }
     );
     promisse.then((response) => {
-      localStorage.setItem('token', `${response.data.token}`);
+      localStorage.setItem('token', `${response.data}`);
       tokenContext.setIsToken((prev) => true);
       navigate('/');
     });
