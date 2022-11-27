@@ -121,7 +121,7 @@ export default function Product() {
   const { productId } = useParams();
   const [product, setProduct] = useState({});
   const [price, setPrice] = useState(0);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [stars, setStars] = useState([]);
   const isLoggedIn = localStorage.getItem('token');
   const navigate = useNavigate();
