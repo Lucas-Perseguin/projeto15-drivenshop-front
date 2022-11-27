@@ -62,7 +62,8 @@ export default function SignUp() {
     alert('Para poder cadastrar um nova conta você deve estar deslogado!');
     navigate('/');
   }
-  function handleSignUp() {
+  function handleSignUp(event) {
+    event.preventDefault();
     if (!(name && email && cpf && password && confirmPassword)) {
       return alert('Preencha todos os campos!');
     }
@@ -84,7 +85,7 @@ export default function SignUp() {
   }
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSignUp}>
         <Title>CADASTRAR</Title>
         <Inputs>
           <InputGroup>
@@ -128,7 +129,7 @@ export default function SignUp() {
             />
           </InputGroup>
         </Inputs>
-        <Button onClick={handleSignUp}>CRIAR</Button>
+        <Button>CRIAR</Button>
         <Anchor to="/login">JÁ POSSUI UMA CONTA?</Anchor>
       </Form>
     </Container>
