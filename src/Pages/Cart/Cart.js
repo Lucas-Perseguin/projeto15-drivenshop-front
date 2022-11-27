@@ -136,6 +136,9 @@ export default function Cart() {
       alert('Para finalizar sua compra você deve estar logado!');
       navigate('/login');
     } else {
+      if (!(name || email || cpf || adress || cellphone)) {
+        return alert('Preencha todos os campos!');
+      }
       const config = {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -145,11 +148,27 @@ export default function Cart() {
         `${process.env.REACT_APP_BACK_END_API_URI}/deleteCart`,
         config
       );
-      promisse.then((response) => {
+      promisse.then((response) => {});
+      promisse.catch((error) => {
+        alert(
+          `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
+        );
+      });
+      const products = cart.map((product) => ({
+        productId: product._id,
+        amount: product.amount,
+      }));
+      const data = { products: products, name, email, cpf, adress, cellphone };
+      const purchase = axios.post(
+        `${process.env.REACT_APP_BACK_END_API_URI}/purchase`,
+        data,
+        config
+      );
+      purchase.then((response) => {
         alert('Sua compra foi realizada com sucesso!');
         navigate('/');
       });
-      promisse.catch((error) => {
+      purchase.catch((error) => {
         alert(
           `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
         );
