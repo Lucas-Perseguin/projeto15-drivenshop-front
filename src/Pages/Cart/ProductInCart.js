@@ -186,7 +186,7 @@ export default function ProductInCart({
         <Price>
           <h1>Cada</h1>
           <h1>
-            {product.price.toLocaleString('pt-br', {
+            {product.price?.toLocaleString('pt-br', {
               style: 'currency',
               currency: 'BRL',
             })}
@@ -200,7 +200,7 @@ export default function ProductInCart({
         <Total>
           <h1>Total</h1>
           <h1>
-            {total.toLocaleString('pt-br', {
+            {total?.toLocaleString('pt-br', {
               style: 'currency',
               currency: 'BRL',
             })}
