@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const Global = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
@@ -18,7 +18,6 @@ export const Global = createGlobalStyle`
         padding: 0;
         border: 0;
         font-size: 100%;
-        font: inherit;
         vertical-align: baseline;
     }
     /* HTML5 display-role reset for older browsers */
