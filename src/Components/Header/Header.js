@@ -74,14 +74,13 @@ export default function Header() {
                 setToggleSearch((t) => !t);
               }}
             ></ion-icon>
-            <Link to="/">
+            <Link to="/carrinho">
               <ion-icon
                 style={{
                   fontSize: '22px',
                   color: '#2c2c2c',
                   cursor: 'pointer',
                 }}
-                onClick={() => navigate('/carrinho')}
                 name="cart"
               ></ion-icon>
             </Link>
