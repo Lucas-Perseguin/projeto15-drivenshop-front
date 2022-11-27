@@ -57,92 +57,124 @@ export default function ProductInCart({
   const [productAmount, setProductAmount] = useState(product.amount);
 
   function handleAdd() {
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    };
-    const promisse = axios.post(
-      `${process.env.REACT_APP_BACK_END_API_URI}/add/${product._id}`,
-      { amount: 1 },
-      config
-    );
-    promisse.then((response) => {
-      setProductAmount(productAmount + 1);
-      setTotal((productAmount + 1) * product.price);
-      totalValue += product.price;
-      setTotalValue(totalValue);
-      cart.forEach((thisProduct) => {
-        if (thisProduct._id === product._id) {
-          thisProduct.amount++;
-        }
-        setCart(cart);
-      });
-    });
-    promisse.catch((error) => {
-      return alert(
-        `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
+    const token = localStorage.getItem('token');
+    if (token) {
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      };
+      const promisse = axios.post(
+        `${process.env.REACT_APP_BACK_END_API_URI}/add/${product._id}`,
+        { amount: 1 },
+        config
       );
-    });
+      promisse.then((response) => {
+        setProductAmount(productAmount + 1);
+        setTotal((productAmount + 1) * product.price);
+        totalValue += product.price;
+        setTotalValue(totalValue);
+        cart.forEach((thisProduct) => {
+          if (thisProduct._id === product._id) {
+            thisProduct.amount++;
+          }
+          setCart(cart);
+        });
+      });
+      promisse.catch((error) => {
+        return alert(
+          `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
+        );
+      });
+    } else {
+      const localCart = JSON.parse(localStorage.getItem('token'));
+      const index = localCart.findIndex(
+        (cartProduct) => cartProduct._id === product._id
+      );
+      localCart[index].amount++;
+      localStorage.setItem('cart', `${JSON.stringify(localCart)}`);
+      setCart(localCart);
+    }
   }
 
   function handleRemove() {
     if (productAmount === 1) {
       return handleDelete();
     }
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    };
-    const promisse = axios.post(
-      `${process.env.REACT_APP_BACK_END_API_URI}/remove/${product._id}`,
-      null,
-      config
-    );
-    promisse.then((response) => {
-      setProductAmount(productAmount - 1);
-      setTotal((productAmount - 1) * product.price);
-      totalValue -= product.price;
-      setTotalValue(totalValue);
-      cart.forEach((thisProduct) => {
-        if (thisProduct._id === product._id) {
-          thisProduct.amount--;
-        }
-        setCart(cart);
-      });
-    });
-    promisse.catch((error) => {
-      return alert(
-        `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
+    const token = localStorage.getItem('token');
+    if (token) {
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      };
+      const promisse = axios.post(
+        `${process.env.REACT_APP_BACK_END_API_URI}/remove/${product._id}`,
+        null,
+        config
       );
-    });
+      promisse.then((response) => {
+        setProductAmount(productAmount - 1);
+        setTotal((productAmount - 1) * product.price);
+        totalValue -= product.price;
+        setTotalValue(totalValue);
+        cart.forEach((thisProduct) => {
+          if (thisProduct._id === product._id) {
+            thisProduct.amount--;
+          }
+          setCart(cart);
+        });
+      });
+      promisse.catch((error) => {
+        return alert(
+          `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
+        );
+      });
+    } else {
+      const localCart = JSON.parse(localStorage.getItem('token'));
+      const index = localCart.findIndex(
+        (cartProduct) => cartProduct._id === product._id
+      );
+      localCart[index].amount--;
+      localStorage.setItem('cart', `${JSON.stringify(localCart)}`);
+      setCart(localCart);
+    }
   }
 
   function handleDelete() {
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    };
-    const promisse = axios.delete(
-      `${process.env.REACT_APP_BACK_END_API_URI}/delete/${product._id}`,
-      config
-    );
-    promisse.then((response) => {
-      totalValue -= productAmount * product.price;
-      setTotalValue(totalValue);
-      const productIndex = cart.findIndex(
-        (thisProduct) => thisProduct._id === product._id
+    const token = localStorage.getItem('token');
+    if (token) {
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      };
+      const promisse = axios.delete(
+        `${process.env.REACT_APP_BACK_END_API_URI}/delete/${product._id}`,
+        config
       );
-      cart.splice(productIndex, 1);
-      setCart(cart);
-    });
-    promisse.catch((error) => {
-      return alert(
-        `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
+      promisse.then((response) => {
+        totalValue -= productAmount * product.price;
+        setTotalValue(totalValue);
+        const productIndex = cart.findIndex(
+          (thisProduct) => thisProduct._id === product._id
+        );
+        cart.splice(productIndex, 1);
+        setCart(cart);
+      });
+      promisse.catch((error) => {
+        return alert(
+          `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
+        );
+      });
+    } else {
+      const localCart = JSON.parse(localStorage.getItem('token'));
+      const filteredLocalCart = localCart.filter(
+        (cartProduct) => cartProduct._id !== product._id
       );
-    });
+      localStorage.setItem('cart', `${JSON.stringify(filteredLocalCart)}`);
+      setCart(filteredLocalCart);
+    }
   }
 
   return (
