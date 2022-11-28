@@ -109,6 +109,8 @@ export default function ProductInCart({
         (cartProduct) => cartProduct._id === product._id
       );
       localCart[index].amount++;
+      setProductAmount((prev) => prev + 1);
+      setTotalValue((prev) => prev + product.price);
       localStorage.setItem('cart', `${JSON.stringify(localCart)}`);
       setCart(localCart);
     }
@@ -153,6 +155,8 @@ export default function ProductInCart({
         (cartProduct) => cartProduct._id === product._id
       );
       localCart[index].amount--;
+      setProductAmount((prev) => prev - 1);
+      setTotalValue((prev) => prev - product.price);
       localStorage.setItem('cart', `${JSON.stringify(localCart)}`);
       setCart(localCart);
     }
