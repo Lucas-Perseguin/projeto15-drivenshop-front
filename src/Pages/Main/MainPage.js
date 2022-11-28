@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 export default function MainPage() {
   const [products, setProducts] = useState();
   const navigate = useNavigate();
+  const width = window.innerWidth / 232;
 
   useEffect(() => {
     const promise = axios.get(
@@ -43,12 +44,12 @@ export default function MainPage() {
         <LineSection>Uma Seleção Driven para você</LineSection>
         <Items>
           <div>
-            {products.slice(0, 5).map((product, index) => (
+            {products.slice(0, width).map((product, index) => (
               <Item key={index} product={product}></Item>
             ))}
           </div>
           <div>
-            {products.slice(5, 10).map((product, index) => (
+            {products.slice(width, 2 * width).map((product, index) => (
               <Item key={index} product={product}></Item>
             ))}
           </div>
