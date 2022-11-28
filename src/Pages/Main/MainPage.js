@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 export default function MainPage() {
   const [products, setProducts] = useState();
   const navigate = useNavigate();
-  const width = window.innerWidth / 232;
+  const width = Math.floor(window.innerWidth / 232);
 
   useEffect(() => {
     const promise = axios.get(
