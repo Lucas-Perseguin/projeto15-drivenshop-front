@@ -148,7 +148,7 @@ export default function ProductInCart({
         );
       });
     } else {
-      const localCart = JSON.parse(localStorage.getItem('token'));
+      const localCart = JSON.parse(localStorage.getItem('cart'));
       const index = localCart.findIndex(
         (cartProduct) => cartProduct._id === product._id
       );
@@ -163,7 +163,7 @@ export default function ProductInCart({
     if (token) {
       const config = {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          Authorization: 'Bearer ' + localStorage.getItem('cart'),
         },
       };
       const promisse = axios.delete(
