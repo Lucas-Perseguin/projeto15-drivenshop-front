@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 export default function MainPage() {
   const [products, setProducts] = useState();
   const navigate = useNavigate();
+
   useEffect(() => {
     const promise = axios.get(
       `${process.env.REACT_APP_BACK_END_API_URI}/products`
@@ -41,9 +42,16 @@ export default function MainPage() {
         </Categories>
         <LineSection>Uma Seleção Driven para você</LineSection>
         <Items>
-          {products.slice(0, 10).map((product, index) => (
-            <Item key={index} product={product}></Item>
-          ))}
+          <div>
+            {products.slice(0, 5).map((product, index) => (
+              <Item key={index} product={product}></Item>
+            ))}
+          </div>
+          <div>
+            {products.slice(5, 10).map((product, index) => (
+              <Item key={index} product={product}></Item>
+            ))}
+          </div>
         </Items>
         <ContainerSales>
           <Sales products={products}></Sales>
@@ -126,8 +134,10 @@ const LineSection = styled.div`
   margin-bottom: 2em;
 `;
 const Items = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 `;
 const ContainerSales = styled.div``;
