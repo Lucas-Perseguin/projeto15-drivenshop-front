@@ -18,7 +18,7 @@ export default function MainPage() {
       setProducts(resposta.data);
     });
     promise.catch((erro) => {
-      console.log(erro.reponse.data);
+      console.log(erro.response.data);
     });
   }, [products]);
 
@@ -41,7 +41,7 @@ export default function MainPage() {
         </Categories>
         <LineSection>Uma Seleção Driven para você</LineSection>
         <Items>
-          {products.slice(0,10).map((product, index) => (
+          {products.slice(0, 10).map((product, index) => (
             <Item key={index} product={product}></Item>
           ))}
         </Items>
@@ -128,7 +128,6 @@ const LineSection = styled.div`
 const Items = styled.div`
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
 `;
-const ContainerSales = styled.div`
-`;
+const ContainerSales = styled.div``;
