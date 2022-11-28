@@ -73,7 +73,7 @@ const Inputs = styled.div`
 
 const Value = styled.div`
   width: 100%;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: black;
 `;

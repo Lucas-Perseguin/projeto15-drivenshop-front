@@ -18,8 +18,8 @@ const ProductContainer = styled.div`
   justify-content: space-between;
   width: 800px;
   ion-icon {
-    color: red;
-    font-size: 30px;
+    color: ${mainPink};
+    font-size: 35px;
     cursor: pointer;
   }
   img {
