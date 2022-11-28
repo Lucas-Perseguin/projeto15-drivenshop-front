@@ -60,7 +60,7 @@ const ContainerSearch = styled.div`
 const Title = styled.h1`
   font-size: 1.5em;
   text-transform: uppercase;
-  color: #000;
+  color: white;
   font-weight: 900;
   margin-bottom: 1em;
 `;
