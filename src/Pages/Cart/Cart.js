@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { mainGrey } from '../../constants';
+import { mainGrey, mainPink } from '../../constants';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import ProductInCart from './ProductInCart';
 import Input from '../../Components/Forms/Input/Input';
@@ -45,6 +45,8 @@ const MainDataContainer = styled.div`
   align-items: flex-start;
   background-color: white;
   padding: 20px;
+  border: 1px solid ${mainPink};
+  border-radius: 20px;
 `;
 
 const Productscontainer = styled.div`
@@ -155,7 +157,7 @@ export default function Cart() {
       alert('Para finalizar sua compra você deve estar logado!');
       navigate('/login');
     } else {
-      if (!(name || email || cpf || adress || cellphone)) {
+      if (!(name && email && cpf && adress && cellphone)) {
         return alert('Preencha todos os campos!');
       }
       const config = {

@@ -29,7 +29,12 @@ const ProductContainer = styled.div`
   }
 `;
 
-const Name = styled.h1``;
+const Name = styled.div`
+  width: 200px;
+  word-wrap: break-word;
+  font-size: 16px;
+  font-weight: 800;
+`;
 
 const Price = styled.div``;
 
