@@ -7,7 +7,7 @@ const Container = styled.div`
   width: 100%;
   hr {
     width: 100%;
-    background-color: ${mainPink};
+    color: ${mainPink};
     height: 2px;
     margin-bottom: 30px;
   }
