@@ -185,7 +185,7 @@ export default function ProductInCart({
         );
       });
     } else {
-      const localCart = JSON.parse(localStorage.getItem('token'));
+      const localCart = JSON.parse(localStorage.getItem('cart'));
       const filteredLocalCart = localCart.filter(
         (cartProduct) => cartProduct._id !== product._id
       );
