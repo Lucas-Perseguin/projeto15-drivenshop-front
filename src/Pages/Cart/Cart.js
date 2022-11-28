@@ -202,7 +202,7 @@ export default function Cart() {
       <Container>
         <Title>
           <ion-icon name="bag-handle-outline"></ion-icon>
-          <h1>MEU CARRINHO</h1>
+          <h1>CARRINHO</h1>
         </Title>
         <MainDataContainer>
           <Productscontainer>
