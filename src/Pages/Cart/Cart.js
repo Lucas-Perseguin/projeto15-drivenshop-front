@@ -142,7 +142,7 @@ export default function Cart() {
       );
       userFound.then((response) => {
         setName(response.data.name);
-        setEmail(response.data.eamil);
+        setEmail(response.data.email);
         setCpf(response.data.cpf);
       });
       setLoading(false);
