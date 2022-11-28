@@ -78,15 +78,14 @@ const Buttons = styled.div`
 const Counter = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 124px;
   height: 50px;
   button {
-    width: 19px;
-    height: 48px;
     font-weight: 500;
-    font-size: 32px;
+    font-size: 20px;
     text-align: center;
     background-color: ${mainGrey};
+    color: white;
+    width: 25px;
   }
   div {
     width: 50px;
@@ -94,6 +93,8 @@ const Counter = styled.div`
     text-align: center;
     color: black;
     background-color: white;
+    line-height: 50px;
+    font-size: 20px;
   }
 `;
 
@@ -224,7 +225,9 @@ export default function Product() {
     return (
       <Container>
         <AnchorContainer>
-          <Anchor to="/produtos/smartphones">SMARTPHONES</Anchor>
+          <Anchor to={`/produtos/${product.type}`}>
+            {product.type?.toUpperCase()}
+          </Anchor>
         </AnchorContainer>
         <img src={product.image} alt="Imagem do produto" />
         <Title>{product.name}</Title>
