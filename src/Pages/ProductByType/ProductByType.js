@@ -1,17 +1,16 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container } from "./ProductByType.style";
-import Products from "./../../Components/Products/Products";
-import Type from "./Type/Type";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Container } from './ProductByType.style';
+import Products from './../../Components/Products/Products';
+import Type from './Type/Type';
 
 export default function ProductByType() {
   const [products, setProducts] = useState([]);
   const params = useParams();
-  console.log(params);
   useEffect(() => {
     const promise = axios.get(
-      process.env.REACT_APP_BACK_END_API_URI + "/products/" + params.type
+      process.env.REACT_APP_BACK_END_API_URI + '/products/' + params.type
     );
     promise.then(({ data }) => {
       setProducts(data);
