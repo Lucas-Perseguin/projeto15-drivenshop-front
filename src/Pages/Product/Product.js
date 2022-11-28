@@ -86,6 +86,7 @@ const Counter = styled.div`
     background-color: ${mainGrey};
     color: white;
     width: 25px;
+    cursor: pointer;
   }
   div {
     width: 50px;
