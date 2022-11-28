@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { mainPink } from '../../constants';
 
 export default function DataSearch(props) {
   const { product } = props;
@@ -20,32 +21,36 @@ export default function DataSearch(props) {
   );
 }
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 12.5em;
-  height: 22em;
+  height: 390px;
   text-align: center;
   margin: 0 1em 1em 1em;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid ${mainPink};
+  cursor: pointer;
 `;
 const Image = styled.img`
   width: 100%;
-  height: 11em;
-  background-color: #fff;
+  height: 10em;
+  background-color: black;
   border-radius: 0.31em;
   margin-bottom: 0.5em;
-  cursor: pointer;
 `;
 const ProductName = styled.p`
   width: 100%;
-  height: 5em;
-  color: #fff;
+  color: black;
   font-size: 0.8em;
   line-height: 1.5;
-  cursor: pointer;
 `;
 const Price = styled.p`
   width: 100%;
-  height: 2em;
-  color: #fff;
+  color: black;
   font-size: 1em;
-  line-height: 1.5;
   font-weight: 700;
+  margin-top: 25px;
 `;

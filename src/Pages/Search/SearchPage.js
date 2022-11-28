@@ -73,7 +73,6 @@ const SearchResult = styled.div`
   margin-bottom: 1em;
 `;
 const Items = styled.div`
-  height: 45em;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

@@ -12,17 +12,37 @@ export default function MainPage() {
   const navigate = useNavigate();
   const width = Math.floor(window.innerWidth / 232);
 
+  function shuffle(array) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
+
   useEffect(() => {
     const promise = axios.get(
       `${process.env.REACT_APP_BACK_END_API_URI}/products`
     );
     promise.then((resposta) => {
-      setProducts(resposta.data);
+      setProducts(shuffle(resposta.data));
     });
     promise.catch((erro) => {
       console.log(erro.response.data);
     });
-  }, [products]);
+  }, []);
 
   if (products === undefined) {
     return <LoadingPage text="Carregando produtos" />;
@@ -140,5 +160,6 @@ const Items = styled.div`
     justify-content: center;
     flex-wrap: wrap;
   }
+  margin-bottom: 20px;
 `;
 const ContainerSales = styled.div``;
