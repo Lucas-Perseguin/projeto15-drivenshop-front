@@ -189,6 +189,7 @@ export default function ProductInCart({
       const filteredLocalCart = localCart.filter(
         (cartProduct) => cartProduct._id !== product._id
       );
+      setTotalValue((prev) => prev - product.price);
       localStorage.setItem('cart', `${JSON.stringify(filteredLocalCart)}`);
       setCart(filteredLocalCart);
     }
