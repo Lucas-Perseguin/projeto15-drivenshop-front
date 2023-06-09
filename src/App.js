@@ -9,14 +9,15 @@ import SearchPage from "./Pages/Search/SearchPage";
 import ProductBySale from "./Pages/ProductBySale/ProductBySale";
 import ProductByType from "./Pages/ProductByType/ProductByType";
 import IsLoggedInProvider from "./Context/isLoggedInContext";
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
     <IsLoggedInProvider>
       <BrowserRouter>
-        <ToastContainer position="top-left" />
         <LayoutDefault>
+          <ToastContainer position="top-left" />
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/busca" element={<SearchPage />} />
