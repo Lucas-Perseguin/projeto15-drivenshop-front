@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import { mainPink, mainGrey } from '../../constants';
-import Item from './Item';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import Sales from './Sales';
-import LoadingPage from '../LoadingPage/LoadingPage';
-import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
+import { mainPink, mainGrey } from "../../constants";
+import Item from "./Item";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Sales from "./Sales";
+import LoadingPage from "../LoadingPage/LoadingPage";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
   const [products, setProducts] = useState();
@@ -51,13 +51,13 @@ export default function MainPage() {
       <Container>
         <Title>Categorias</Title>
         <Categories>
-          <SmartPhones onClick={() => navigate('/produtos/smartphone')}>
+          <SmartPhones onClick={() => navigate("/produtos/smartphone")}>
             <Text>SmartPhones</Text>
           </SmartPhones>
-          <Notebooks onClick={() => navigate('/produtos/notebook')}>
+          <Notebooks onClick={() => navigate("/produtos/notebook")}>
             <Text>Notebooks</Text>
           </Notebooks>
-          <Gadgets onClick={() => navigate('/produtos/gadget')}>
+          <Gadgets onClick={() => navigate("/produtos/gadget")}>
             <Text>Gadgets</Text>
           </Gadgets>
         </Categories>
@@ -84,7 +84,7 @@ export default function MainPage() {
 const Container = styled.div`
   text-align: center;
   padding-top: 2.5em;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 `;
 const Title = styled.h1`
   font-size: 1.5em;
@@ -106,7 +106,7 @@ const Categories = styled.div`
 const SmartPhones = styled.div`
   width: 28%;
   height: 15.6em;
-  background-image: url('https://www.showmetech.com.br/wp-content/uploads//2021/12/conheca-os-smartphones-mais-aguardados-para-2022-5.png');
+  background-image: url("https://www.showmetech.com.br/wp-content/uploads//2020/11/smartphone-cameras-1024x576.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -126,10 +126,10 @@ const SmartPhones = styled.div`
   }
 `;
 const Notebooks = styled(SmartPhones)`
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCrDNF14yJ46llQ_Owv1-J6zmoIHEt3OLGEw&usqp=CAU');
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCrDNF14yJ46llQ_Owv1-J6zmoIHEt3OLGEw&usqp=CAU");
 `;
 const Gadgets = styled(SmartPhones)`
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzIQhg99XbODt3o8-eTghlixAfWY7kgfBkpw&usqp=CAU');
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzIQhg99XbODt3o8-eTghlixAfWY7kgfBkpw&usqp=CAU");
 `;
 const Text = styled.p`
   font-size: 1.5em;
