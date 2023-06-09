@@ -106,7 +106,7 @@ const Categories = styled.div`
 const SmartPhones = styled.div`
   width: 28%;
   height: 15.6em;
-  background-image: url("https://www.showmetech.com.br/wp-content/uploads//2020/11/smartphone-cameras-1024x576.jpg");
+  background-image: url("https://img.global.news.samsung.com/br/wp-content/uploads/2022/03/a53-e1648750898841.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: bottom;
