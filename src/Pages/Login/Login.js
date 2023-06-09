@@ -9,6 +9,7 @@ import Label from "../../Components/Forms/Input/Label";
 import { isLoggedInContext } from "../../Context/isLoggedInContext";
 import { isLoggedIn } from "../../Utils/auth";
 import { Container, Form, Title, Inputs } from "./Login.style";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [formValues, setFormValues] = useState({
@@ -41,10 +42,9 @@ export default function Login() {
 
     promise.catch((err) => {
       console.log(err);
-      alert("Ocorreu um erro\nVerifique o seu email e senha");
+      toast.error("Ocorreu um erro\nVerifique o seu email e senha");
     });
   }
-  
 
   return (
     <Container>

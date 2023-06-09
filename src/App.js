@@ -1,19 +1,21 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LayoutDefault from './Layouts/LayoutDefault';
-import Cart from './Pages/Cart/Cart';
-import Login from './Pages/Login/Login';
-import Product from './Pages/Product/Product';
-import SignUp from './Pages/SignUp/SignUp';
-import MainPage from './Pages/Main/MainPage';
-import SearchPage from './Pages/Search/SearchPage';
-import ProductBySale from './Pages/ProductBySale/ProductBySale';
-import ProductByType from './Pages/ProductByType/ProductByType';
-import IsLoggedInProvider from './Context/isLoggedInContext';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LayoutDefault from "./Layouts/LayoutDefault";
+import Cart from "./Pages/Cart/Cart";
+import Login from "./Pages/Login/Login";
+import Product from "./Pages/Product/Product";
+import SignUp from "./Pages/SignUp/SignUp";
+import MainPage from "./Pages/Main/MainPage";
+import SearchPage from "./Pages/Search/SearchPage";
+import ProductBySale from "./Pages/ProductBySale/ProductBySale";
+import ProductByType from "./Pages/ProductByType/ProductByType";
+import IsLoggedInProvider from "./Context/isLoggedInContext";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
     <IsLoggedInProvider>
       <BrowserRouter>
+        <ToastContainer position="top-left" />
         <LayoutDefault>
           <Routes>
             <Route path="/" element={<MainPage />} />

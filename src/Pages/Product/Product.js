@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import Anchor from '../../Components/Forms/Anchor/Anchor';
-import Button from '../../Components/Forms/Button/Button';
-import { mainGrey, mainPink } from '../../constants';
-import LoadingPage from '../LoadingPage/LoadingPage';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import Anchor from "../../Components/Forms/Anchor/Anchor";
+import Button from "../../Components/Forms/Button/Button";
+import { mainGrey, mainPink } from "../../constants";
+import LoadingPage from "../LoadingPage/LoadingPage";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   width: 100%;
@@ -125,7 +126,7 @@ export default function Product() {
   const [price, setPrice] = useState(0);
   const [amount, setAmount] = useState(1);
   const [stars, setStars] = useState([]);
-  const isLoggedIn = localStorage.getItem('token');
+  const isLoggedIn = localStorage.getItem("token");
   const navigate = useNavigate();
 
   function createStars(num) {
@@ -150,7 +151,7 @@ export default function Product() {
       createStars(response.data.stars);
     });
     promisse.catch((error) => {
-      return alert(
+      return toast.error(
         `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
       );
     });
@@ -158,17 +159,17 @@ export default function Product() {
 
   function handleBuy(isBuy) {
     if (amount === 0) {
-      alert('VocÊ deve selecionar uma quantidade!');
+      toast.warn("Você deve selecionar uma quantidade!");
       return;
     }
     if (!isLoggedIn) {
-      const cart = localStorage.getItem('cart');
+      const cart = localStorage.getItem("cart");
       if (!cart) {
         const productObj = {
           ...product,
           amount,
         };
-        localStorage.setItem('cart', `${JSON.stringify([productObj])}`);
+        localStorage.setItem("cart", `${JSON.stringify([productObj])}`);
       } else {
         const cartObj = JSON.parse(cart);
         const productFound = cartObj.find(
@@ -180,25 +181,25 @@ export default function Product() {
             amount,
           };
           cartObj.push(productObj);
-          localStorage.setItem('cart', JSON.stringify(cartObj));
+          localStorage.setItem("cart", JSON.stringify(cartObj));
         } else {
           cartObj.forEach((product) => {
             if (product._id === productId) {
               product.amount += amount;
             }
           });
-          localStorage.setItem('cart', `${JSON.stringify(cartObj)}`);
+          localStorage.setItem("cart", `${JSON.stringify(cartObj)}`);
         }
       }
       if (isBuy) {
-        navigate('/carrinho');
+        navigate("/carrinho");
       } else {
-        alert('Item(s) adicionado(s) ao carrinho!');
+        toast.success("Item(s) adicionado(s) ao carrinho!");
       }
     } else {
       const config = {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       };
       const promisse = axios.post(
@@ -208,13 +209,13 @@ export default function Product() {
       );
       promisse.then((response) => {
         if (isBuy) {
-          navigate('/carrinho');
+          navigate("/carrinho");
         } else {
-          alert('Item(s) adicionado(s) ao carrinho!');
+          toast.success("Item(s) adicionado(s) ao carrinho!");
         }
       });
       promisse.catch((error) => {
-        return alert(
+        return toast.error(
           `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
         );
       });
@@ -234,9 +235,9 @@ export default function Product() {
         <Title>{product.name}</Title>
         <Stars>{stars.map((star) => star)}</Stars>
         <Price>
-          {price.toLocaleString('pt-br', {
-            style: 'currency',
-            currency: 'BRL',
+          {price.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
           })}
         </Price>
         <hr />

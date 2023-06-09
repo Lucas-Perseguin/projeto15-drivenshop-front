@@ -1,13 +1,14 @@
-import axios from 'axios';
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import Anchor from '../../Components/Forms/Anchor/Anchor';
-import Button from '../../Components/Forms/Button/Button';
-import Input from '../../Components/Forms/Input/Input';
-import InputGroup from '../../Components/Forms/Input/InputGroup';
-import Label from '../../Components/Forms/Input/Label';
-import { isLoggedInContext } from '../../Context/isLoggedInContext';
+import axios from "axios";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import Anchor from "../../Components/Forms/Anchor/Anchor";
+import Button from "../../Components/Forms/Button/Button";
+import Input from "../../Components/Forms/Input/Input";
+import InputGroup from "../../Components/Forms/Input/InputGroup";
+import Label from "../../Components/Forms/Input/Label";
+import { isLoggedInContext } from "../../Context/isLoggedInContext";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   width: 100%;
@@ -34,7 +35,7 @@ const Form = styled.form`
 `;
 
 const Title = styled.h1`
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 900;
   font-size: 42px;
@@ -50,37 +51,41 @@ const Inputs = styled.div`
 `;
 
 export default function SignUp() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const tokenContext = useContext(isLoggedInContext);
   if (token) {
-    alert('Para poder cadastrar um nova conta você deve estar deslogado!');
-    navigate('/');
+    toast.warning(
+      "Para poder cadastrar um nova conta você deve estar deslogado!"
+    );
+    navigate("/");
   }
   function handleSignUp(event) {
     event.preventDefault();
     if (!(name && email && cpf && password && confirmPassword)) {
-      return alert('Preencha todos os campos!');
+      return toast.warn("Preencha todos os campos!");
     }
     if (password !== confirmPassword) {
-      return alert('As senhas devem ser iguais!');
+      return toast.warn("As senhas devem ser iguais!");
     }
     const promisse = axios.post(
       `${process.env.REACT_APP_BACK_END_API_URI}/sign-up`,
       { name, email, cpf, password }
     );
     promisse.then((response) => {
-      localStorage.setItem('token', `${response.data}`);
+      localStorage.setItem("token", `${response.data}`);
       tokenContext.setIsToken((prev) => true);
-      navigate('/');
+      navigate("/");
     });
     promisse.catch((error) => {
-      return alert(`Erro: ${error.response.status}\n${error.response.message}`);
+      return toast.error(
+        `Houve um erro ao cadastrar sua conta, tente de novo mais tarde!`
+      );
     });
   }
   return (

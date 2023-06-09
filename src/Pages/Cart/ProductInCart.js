@@ -1,7 +1,8 @@
-import axios from 'axios';
-import { useState } from 'react';
-import styled from 'styled-components';
-import { mainGrey, mainPink } from '../../constants';
+import axios from "axios";
+import { useState } from "react";
+import styled from "styled-components";
+import { mainGrey, mainPink } from "../../constants";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   width: 100%;
@@ -75,11 +76,11 @@ export default function ProductInCart({
   const [productAmount, setProductAmount] = useState(product.amount);
 
   function handleAdd() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       const config = {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       };
       const promisse = axios.post(
@@ -100,19 +101,19 @@ export default function ProductInCart({
         });
       });
       promisse.catch((error) => {
-        return alert(
+        return toast.error(
           `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
         );
       });
     } else {
-      const localCart = JSON.parse(localStorage.getItem('cart'));
+      const localCart = JSON.parse(localStorage.getItem("cart"));
       const index = localCart.findIndex(
         (cartProduct) => cartProduct._id === product._id
       );
       localCart[index].amount++;
       setProductAmount((prev) => prev + 1);
       setTotalValue((prev) => prev + product.price);
-      localStorage.setItem('cart', `${JSON.stringify(localCart)}`);
+      localStorage.setItem("cart", `${JSON.stringify(localCart)}`);
       setCart(localCart);
     }
   }
@@ -121,11 +122,11 @@ export default function ProductInCart({
     if (productAmount === 1) {
       return handleDelete();
     }
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       const config = {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       };
       const promisse = axios.post(
@@ -146,29 +147,29 @@ export default function ProductInCart({
         });
       });
       promisse.catch((error) => {
-        return alert(
+        return toast.error(
           `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
         );
       });
     } else {
-      const localCart = JSON.parse(localStorage.getItem('cart'));
+      const localCart = JSON.parse(localStorage.getItem("cart"));
       const index = localCart.findIndex(
         (cartProduct) => cartProduct._id === product._id
       );
       localCart[index].amount--;
       setProductAmount((prev) => prev - 1);
       setTotalValue((prev) => prev - product.price);
-      localStorage.setItem('cart', `${JSON.stringify(localCart)}`);
+      localStorage.setItem("cart", `${JSON.stringify(localCart)}`);
       setCart(localCart);
     }
   }
 
   function handleDelete() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       const config = {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       };
       const promisse = axios.delete(
@@ -185,17 +186,17 @@ export default function ProductInCart({
         setCart(cart);
       });
       promisse.catch((error) => {
-        return alert(
+        return toast.error(
           `Erro: ${error.response.status}\n, Algo deu errado tente novamente mais tarde!`
         );
       });
     } else {
-      const localCart = JSON.parse(localStorage.getItem('cart'));
+      const localCart = JSON.parse(localStorage.getItem("cart"));
       const filteredLocalCart = localCart.filter(
         (cartProduct) => cartProduct._id !== product._id
       );
       setTotalValue((prev) => prev - product.price);
-      localStorage.setItem('cart', `${JSON.stringify(filteredLocalCart)}`);
+      localStorage.setItem("cart", `${JSON.stringify(filteredLocalCart)}`);
       setCart(filteredLocalCart);
     }
   }
@@ -209,9 +210,9 @@ export default function ProductInCart({
         <Price>
           <h1>Cada</h1>
           <h1>
-            {product.price?.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
+            {product.price?.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
             })}
           </h1>
         </Price>
@@ -223,9 +224,9 @@ export default function ProductInCart({
         <Total>
           <h1>Total</h1>
           <h1>
-            {total?.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
+            {total?.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
             })}
           </h1>
         </Total>

@@ -1,14 +1,15 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { mainGrey, mainPink } from '../../constants';
-import LoadingPage from '../LoadingPage/LoadingPage';
-import ProductInCart from './ProductInCart';
-import Input from '../../Components/Forms/Input/Input';
-import InputGroup from '../../Components/Forms/Input/InputGroup';
-import Label from '../../Components/Forms/Input/Label';
-import Button from '../../Components/Forms/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { mainGrey, mainPink } from "../../constants";
+import LoadingPage from "../LoadingPage/LoadingPage";
+import ProductInCart from "./ProductInCart";
+import Input from "../../Components/Forms/Input/Input";
+import InputGroup from "../../Components/Forms/Input/InputGroup";
+import Label from "../../Components/Forms/Input/Label";
+import Button from "../../Components/Forms/Button/Button";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   width: 100%;
@@ -82,18 +83,18 @@ export default function Cart() {
   const [cart, setCart] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [totalValue, setTotalValue] = useState(0);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [adress, setAdress] = useState('');
-  const [cellphone, setCellphone] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [adress, setAdress] = useState("");
+  const [cellphone, setCellphone] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const localCart = JSON.parse(localStorage.getItem('cart')) ?? [];
+    const token = localStorage.getItem("token");
+    const localCart = JSON.parse(localStorage.getItem("cart")) ?? [];
     const config = {
       headers: {
-        Authorization: 'Bearer ' + token,
+        Authorization: "Bearer " + token,
       },
     };
     if (token && localCart) {
@@ -105,12 +106,12 @@ export default function Cart() {
         );
         promisse.then((response) => {});
         promisse.catch((error) => {
-          return alert(
+          return toast.error(
             `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
           );
         });
       });
-      localStorage.removeItem('cart');
+      localStorage.removeItem("cart");
     }
     if (!token) {
       setCart(localCart);
@@ -134,7 +135,7 @@ export default function Cart() {
         setTotalValue(auxTotalValue);
       });
       promisse.catch((error) => {
-        return alert(
+        return toast.error(
           `Erro: ${error.response.status}\n,Algo deu errado tente novamente mais tarde!`
         );
       });
@@ -152,17 +153,17 @@ export default function Cart() {
   }, []);
 
   function handlePurchase() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      alert('Para finalizar sua compra você deve estar logado!');
-      navigate('/login');
+      toast.warn("Para finalizar sua compra você deve estar logado!");
+      navigate("/login");
     } else {
       if (!(name && email && cpf && adress && cellphone)) {
-        return alert('Preencha todos os campos!');
+        return toast.warn("Preencha todos os campos!");
       }
       const config = {
         headers: {
-          Authorization: 'Bearer ' + token,
+          Authorization: "Bearer " + token,
         },
       };
       const promisse = axios.delete(
@@ -171,7 +172,7 @@ export default function Cart() {
       );
       promisse.then((response) => {});
       promisse.catch((error) => {
-        alert(
+        toast.error(
           `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
         );
       });
@@ -186,11 +187,11 @@ export default function Cart() {
         config
       );
       purchase.then((response) => {
-        alert('Sua compra foi realizada com sucesso!');
-        navigate('/');
+        toast.success("Sua compra foi realizada com sucesso!");
+        navigate("/");
       });
       purchase.catch((error) => {
-        alert(
+        toast.error(
           `Erro: ${error.response.status}\nAlgo deu errado, tente novamente mais tarde!`
         );
       });
@@ -268,10 +269,10 @@ export default function Cart() {
               </InputGroup>
             </Inputs>
             <Value>
-              Valor total:{' '}
-              {totalValue.toLocaleString('pt-br', {
-                style: 'currency',
-                currency: 'BRL',
+              Valor total:{" "}
+              {totalValue.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
               })}
             </Value>
             <Button disabled={!cart} onClick={handlePurchase}>
